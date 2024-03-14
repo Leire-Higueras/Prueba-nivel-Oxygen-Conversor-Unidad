@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!--Metadatos-->
+        <meta charset="UTF-8"> <!--Codificación de caracteres.-->
+        <meta name="author" content="Leire Higueras">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--Responsive-->
+        <title>Conversor Unidad</title>
+        <!--CSS-->
+        <link rel="stylesheet" href="css/style.css">
+        <!-- Google Fonts Tipografia -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@500&family=Rubik+Dirt&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+         <!-- Iconos de Bootstrap -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    </head>
+    <body>
+        <!--Header-->
+            <header class="header">
+                <div >
+                    <i class="bi bi-arrow-left-right logo"></i>
+                    <span class="title">unit converter</span>
+                </div>                
+            </header>
+
+        <!--Cuadro Principal-->
+
+        <div class="cuadroP">
+            <div class="cuadroP-text">convert</div>
+            <select class="selector">
+                <option value="km">Km -> Millas</option>
+                <option value="millas">Millas -> Km</option>
+                <option value="pies">Pies -> Metros</option>
+                <option value="metros">Metros -> Pies</option>
+                <option value="centimetros">Centímetros -> Pulgadas</option>
+                <option value="pulgadas">Pulgadas -> Centímetros</option>
+            </select>
+            <div class="corazonGuardado">
+                <button class="icocorazon"><i class="bi bi-heart"></i></button>
+            </div>
+            <div class="iconoConvertir">
+                <button class="iconoflecha"><i class="bi bi-arrow-left-right"></i></button>
+            </div>
+
+            <input class="numero" type="number" min="0" placeholder="Escribe la cantidad deseada"> <!--con type number evitamos que se escriban letras-->
+
+            <div class="unidadNumero"></div>
+
+            <div class="respuesta">0.00</div>
+
+            <div class="unidadRespuesta"></div>
+           
+        </div>
+
+         <!--Cuadro Secundario-->
+
+         <div class="cuadroSecundario">
+            <div class="saved-text">Saved</div>
+
+            <!--Rectangulos de guardado-->
+            <div class="rectangulosGuardado">
+                <div class="rectanguloGuardado">
+                    <span id="rectanguloGuardado1"></span><button class="cerrar" onclick= "borrarContenido('rectanguloGuardado1')" ><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="rectanguloGuardado">
+                    <span id="rectanguloGuardado2"></span><button class="cerrar" onclick= "borrarContenido('rectanguloGuardado2')"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="rectanguloGuardado">
+                    <span id="rectanguloGuardado3"></span><button class="cerrar" onclick= "borrarContenido('rectanguloGuardado3')" ><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="rectanguloGuardado">
+                    <span id="rectanguloGuardado4"></span><button class="cerrar" onclick= "borrarContenido('rectanguloGuardado4')"><i class="bi bi-x-lg"></i></button>
+                </div>
+            </div>
+            <div class="rectangulosGuardado">
+                <div class="rectanguloGuardado">
+                    <span id="rectanguloGuardado5"></span><button class="cerrar" onclick= "borrarContenido('rectanguloGuardado5')"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="rectanguloGuardado">
+                    <span id="rectanguloGuardado6"></span><button class="cerrar" onclick= "borrarContenido('rectanguloGuardado6')"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="rectanguloGuardado">
+                    <span id="rectanguloGuardado7"></span><button class="cerrar" onclick= "borrarContenido('rectanguloGuardado7')"><i class="bi bi-x-lg"></i></button>
+                </div>
+                <div class="rectanguloGuardado">
+                    <span id="rectanguloGuardado8"></span><button class="cerrar" onclick= "borrarContenido('rectanguloGuardado8')"><i class="bi bi-x-lg"></i></button>
+                </div>
+            </div>
+
+         </div>
+
+         <!--Footer-->
+
+         <footer class="footer">
+                <div class="textoFot1 textoFooter">Terms of service</div>
+                <div class="textoFot2 textoFooter">Privacy policy</div>
+         </footer>
+
+          <!-- JavaScript -->
+          <script>
+            //Script para el resultado 
+            document.addEventListener('DOMContentLoaded', function() {
+                // el botón de conversión
+                document.querySelector('.iconoConvertir').addEventListener('click', function() {
+                // cogemos los valores necesarios
+                    var seleccion = document.querySelector('.selector').value;
+                    var cantidad = parseFloat(document.querySelector('.numero').value);
+
+                    // realizamos la conversion
+                    var resultado;
+                    switch (seleccion) {
+                        case 'km':
+                                resultado = cantidad * 0.621371;
+                            break;
+                        case 'millas':
+                                resultado = cantidad * 1.60934;
+                        break;
+                        case 'pies':
+                                resultado = cantidad * 0.3048;
+                        break;
+                        case 'metros':
+                                resultado = cantidad * 3.28084;
+                        break;
+                        case 'centímetros':
+                                resultado = cantidad * 0.393701;
+                        break;
+                        case 'pulgadas':
+                                resultado = cantidad * 2.54;
+                        break;
+                        default:
+                        resultado = 0;
+                    }
+
+                    // Mostrar el resultado en el div de respuesta
+                        document.querySelector('.respuesta').textContent = resultado.toFixed(2); // Mostrar solo dos decimales
+                });
+            });
+            //Script para el cambiar la unidad del numero seleccionado
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('.selector').addEventListener('change', function() {
+                    // valores otra vez
+                    var opcionSeleccionada = document.querySelector('.selector').value;
+                    // el elemento que necesitamos
+                    var unidad = document.querySelector('.unidadNumero');
+                    
+                    // cambiamos la unidad
+                    switch (opcionSeleccionada) {
+                        case 'km':
+                            unidad.textContent = 'Km';
+                            break;
+                        case 'millas':
+                            unidad.textContent = 'Millas';
+                            break;
+                        case 'pies':
+                            unidad.textContent = 'Pies';
+                            break;
+                        case 'metros':
+                            unidad.textContent = 'Metros';
+                            break;
+                        case 'centimetros':
+                            unidad.textContent = 'Centímetros';
+                            break;
+                        case 'pulgadas':
+                            unidad.textContent = 'Pulgadas';
+                            break;
+                        default:
+                            unidad.textContent = 'Unidad';
+                    }
+                });
+            });
+            
+            //Script para cambiar la unidad de la respuesta
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('.selector').addEventListener('change', function() {
+                    var opcionSeleccionada = document.querySelector('.selector').value;
+                    var unidadRespuesta = document.querySelector('.unidadRespuesta');
+                    
+                    switch (opcionSeleccionada) {
+                        case 'km':
+                            unidadRespuesta.textContent = 'Millas';
+                            break;
+                        case 'millas':
+                            unidadRespuesta.textContent = 'Km';
+                            break;
+                        case 'pies':
+                            unidadRespuesta.textContent = 'Metros';
+                            break;
+                        case 'metros':
+                            unidadRespuesta.textContent = 'Pies';
+                            break;
+                        case 'centimetros':
+                            unidadRespuesta.textContent = 'Pulgadas';
+                            break;
+                        case 'pulgadas':
+                            unidadRespuesta.textContent = 'Centímetros';
+                            break;
+                        default:
+                            unidadRespuesta.textContent = 'Unidad';
+                    }
+                });
+            });
+             
+            //Script de Guardado con el icono corazon en los rectangulos de guardado.
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('.icocorazon').addEventListener('click', function() {
+                    // Obtener la fórmula de conversión
+                    var seleccion = document.querySelector('.selector').value;
+                    var cantidad = parseFloat(document.querySelector('.numero').value);
+                    var formula = '';
+                    //Creamos la formula del demonio
+                    switch (seleccion) {
+                        case 'km':
+                            formula = cantidad + ' Km -> ' + (cantidad * 0.621371).toFixed(2) + ' Millas';
+                            break;
+                        case 'millas':
+                            formula = cantidad + ' Millas -> ' + (cantidad * 1.60934).toFixed(2) + ' Km';
+                            break;
+                        case 'pies':
+                            formula = cantidad + ' Pies -> ' + (cantidad * 0.3048).toFixed(2) + ' Metros';
+                            break;
+                        case 'metros':
+                            formula = cantidad + ' Metros -> ' + (cantidad * 3.28084).toFixed(2) + ' Pies';
+                            break;
+                        case 'centimetros':
+                            formula = cantidad + ' Centímetros -> ' + (cantidad * 0.393701).toFixed(2) + ' Pulgadas';
+                            break;
+                        case 'pulgadas':
+                            formula = cantidad + ' Pulgadas -> ' + (cantidad * 2.54).toFixed(2) + ' Centímetros';
+                            break;
+                        default:
+                            formula = '';
+                    }
+
+                    // Buscamos un rectangulo de guardado vacio
+                    var rectangulosGuardado = document.querySelectorAll('.rectanguloGuardado');
+                    for (var i = 1; i < rectangulosGuardado.length + 1; i++) {
+                        var rectangulo = document.getElementById('rectanguloGuardado' + i);
+                        if (!rectangulo.innerText) {
+                            // Si se encuentra un rectángulo de guardado vacio, se guarda y se borra el input
+                            rectangulo.innerText = formula;
+                            break;
+                        }
+                    }
+                    document.querySelector('.respuesta').textContent = ''; //Ponemos la respuesta en 0.00
+                    document.querySelector('.numero').value = ''; //El input se quede en blanco otra vez
+                });
+            });
+
+            function borrarContenido(idElemento){
+                document.getElementById(idElemento).innerText = "";
+            }
+            
+          </script>
+    </body>
+</html>
